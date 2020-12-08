@@ -1,0 +1,103 @@
+<!-- Intro Section -->
+<section class="bg-brains p-3">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <p class="h4 animated flipInY">
+          <i class="fa fa-money-check"></i> CheckOut</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div *ngIf="loadingSpinner">
+  <img src="../../../../assets/img/spinner.gif" class="d-block m-auto" alt="">
+</div>
+
+<section class="p-3" *ngIf="!loadingSpinner">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 animated zoomIn delay-1s">
+        <div class="card">
+          <div class="card-header bg-dark text-brains">
+            <small class="h4">Billing Address</small>
+            <a routerLink="/users/profile" class="btn btn-brains btn-sm float-right">Update Address</a>
+          </div>
+          <div class="card-body">
+            <ul class="list-group">
+              <li class="list-group-item bg-brains">
+                <small>HNO : {{billingAddress.flat}}</small><br>
+                <small>Street : {{billingAddress.street}}</small><br>
+                <small>Landmark : {{billingAddress.landmark}}</small><br>
+                <small>City : {{billingAddress.city}}</small><br>
+                <small>State : {{billingAddress.state}}</small><br>
+                <small>Country : {{billingAddress.country}}</small><br>
+                <small>PinCode : {{billingAddress.pin}}</small><br>
+                <small>Mobile : {{billingAddress.mobile}}</small><br>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="card mt-3">
+          <div class="card-header bg-dark text-brains">
+            <small class="h4">Payment Details</small>
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" disabled>
+                <label class="form-check-label" for="exampleRadios1">
+                  Cash on Delivery
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                <label class="form-check-label" for="exampleRadios2">
+                  Credit Card Payment
+                </label>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 animated zoomInUp delay-1s">
+        <div class="card">
+          <div class="card-header bg-dark text-brains">
+            <p class="h4">Your Cart</p>
+          </div>
+          <div class="card-body">
+            <ul class="list-group">
+              <li class="list-group-item" *ngFor="let cartItem of cartItems">
+                <div class="row">
+                  <div class="col-2">
+                    <img [src]="cartItem.image" alt="" width="50" height="80">
+                  </div>
+                  <div class="col-1"></div>
+                  <div class="col-7 ">
+                    <small>{{cartItem.name}}</small><br>
+                    <small>{{cartItem.price | currency : 'INR'}}</small><br>
+                    <small>Qty : {{cartItem.qty}}</small><br>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <ul class="list-group ">
+              <li class="list-group-item bg-brains">
+                Total : <span class="font-weight-bold">{{calcTotal() | currency : 'INR'}}</span>
+              </li>
+              <li class="list-group-item bg-brains">
+                Tax : <span class="font-weight-bold">{{calcTax() | currency : 'INR'}}</span>
+              </li>
+              <li class="list-group-item bg-brains">
+                Grand Total : <span class="font-weight-bold">{{calcGrandTotal() | currency : 'INR'}}</span>
+              </li>
+            </ul>
+            <button class="btn btn-danger btn-sm btn-block mt-3">
+              <span (click)="clickPayNow()">PAY {{calcGrandTotal() | currency : 'INR'}} </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

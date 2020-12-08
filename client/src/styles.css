@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+.landing-page{
+  background: white url("./assets/img/background.jpg") no-repeat scroll center;
+  background-size: cover;
+  height: 100vh;
+}
+.wrapper{
+  background-color: rgba(0,0,0,0.6);
+  height: 100%;
+}
+.btn-brains , .bg-brains{
+  background-color: #c4a87b !important;
+  color: black !important;
+}
+.text-brains{
+  color: #c4a87b !important;
+}
+.table tbody tr td{
+  font-weight: bold;
+}
+.is-invalid{
+  background-color: #fdeae2 !important;
+  border-left: 10px solid lightsalmon;
+}
+.is-valid{
+  background-color: #d5fdd5 !important;
+  border-left: 10px solid lightgreen;
+}

@@ -1,0 +1,167 @@
+<!-- Intro Section -->
+<section class="bg-brains p-3">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <p class="h4 animated flipInY">
+          <i class="fa fa-user-circle"></i> Your Profile</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Profile Section -->
+<section class="p-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 text-center animated jello">
+        <img [src]="userInfo.avatar" alt="" class="img-fluid img-thumbnail rounded-circle">
+      </div>
+      <div class="col-md-9">
+        <div class="card animated zoomIn">
+          <div class="card-header bg-dark text-brains">
+            <p class="h4">Your Information</p>
+          </div>
+          <div class="card-body bg-brains">
+              <ul class="list-group">
+                <li class="list-group-item">
+                  NAME : {{userInfo.name}}
+                </li>
+                <li class="list-group-item">
+                  Email : {{userInfo.email}}
+                </li>
+                <li class="list-group-item">
+                  Mobile : {{address?.mobile}}
+                </li>
+              </ul>
+          </div>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div *ngIf="loading">
+          <img src="../../../../assets/img/spinner.gif" class="m-auto d-block" alt="">
+        </div>
+
+        <div class="card mt-4 animated zoomIn" *ngIf="!loading">
+          <div class="card-header bg-dark text-brains">
+            <span class="h4">Billing Address</span>
+            <form class="form-inline float-right">
+              <div class="custom-control custom-switch">
+                <input
+                  name="enableAddress"
+                  [(ngModel)]="enableAddress"
+                  type="checkbox" class="custom-control-input" id="customSwitch1">
+                <label class="custom-control-label" for="customSwitch1">Enable Address</label>
+              </div>
+            </form>
+          </div>
+          <div class="card-body bg-brains">
+            <ul class="list-group" *ngIf="!enableAddress">
+              <li class="list-group-item">
+                Flat : {{address.flat}}
+              </li>
+              <li class="list-group-item">
+                Street : {{address.street}}
+              </li>
+              <li class="list-group-item">
+                Landmark : {{address.landmark}}
+              </li>
+              <li class="list-group-item">
+                City : {{address.city}}
+              </li>
+              <li class="list-group-item">
+                State : {{address.state}}
+              </li>
+              <li class="list-group-item">
+                Country : {{address.country}}
+              </li>
+              <li class="list-group-item">
+                Mobile : {{address.mobile}}
+              </li>
+            </ul>
+            <div *ngIf="enableAddress">
+             <!-- <pre>{{address | json}}</pre>-->
+              <form (submit)="submitUpdateAddress()">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-dark text-brains">Flat</span>
+                  </div>
+                  <input
+                    name="flat"
+                    [(ngModel)]="address.flat"
+                    type="text" class="form-control">
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-dark text-brains">Street</span>
+                  </div>
+                  <input
+                    name="street"
+                    [(ngModel)]="address.street"
+                    type="text" class="form-control">
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-dark text-brains">Landmark</span>
+                  </div>
+                  <input
+                    name="landmark"
+                    [(ngModel)]="address.landmark"
+                    type="text" class="form-control">
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-dark text-brains">City</span>
+                  </div>
+                  <input
+                    name="city"
+                    [(ngModel)]="address.city"
+                    type="text" class="form-control">
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-dark text-brains">State</span>
+                  </div>
+                  <input
+                    name="state"
+                    [(ngModel)]="address.state"
+                    type="text" class="form-control">
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-dark text-brains">Country</span>
+                  </div>
+                  <input
+                    name="country"
+                    [(ngModel)]="address.country"
+                    type="text" class="form-control">
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-dark text-brains">Pin Code</span>
+                  </div>
+                  <input
+                    name="pin"
+                    [(ngModel)]="address.pin"
+                    type="text" class="form-control">
+                </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-dark text-brains">Mobile</span>
+                  </div>
+                  <input
+                    name="mobile"
+                    [(ngModel)]="address.mobile"
+                    type="text" class="form-control">
+                </div>
+                <div>
+                  <input type="submit" class="btn btn-dark text-brains btn-sm" value="Update Address">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,43 @@
+<!-- Intro Section -->
+<section class="bg-brains p-3">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <p class="h4 animated flipInY">Men's Wear</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!--<pre>{{products | json}}</pre>-->
+
+<!-- Loading Spinner -->
+<div *ngIf="loading">
+  <img src="../../../../assets/img/spinner.gif" class="m-auto d-block" alt="">
+</div>
+
+<!-- Product Cards List -->
+<section class="p-3" *ngIf="!loading && products.length > 0">
+  <div class="container">
+    <div class="row">
+      <div *ngFor="let product of products" class="col-md-3">
+        <div class="card animated jello">
+          <div class="card-header text-center bg-white">
+            <a routerLink="/products/{{product._id}}">
+              <img [src]="product.image" alt="" width="150" height="250">
+            </a>
+          </div>
+          <div class="card-body text-center">
+            <ul class="list-group">
+              <li class="list-group-item">
+                <p class="h6 mb-0">{{product.name}}</p>
+                <small>{{product.brand}}</small>
+                <p class="h6">{{product.price | currency : 'INR'}}</p>
+                <button class="btn btn-brains btn-sm" (click)="clickAddToCart(product)">Add to Cart</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

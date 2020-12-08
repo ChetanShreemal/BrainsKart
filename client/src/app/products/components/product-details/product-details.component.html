@@ -1,0 +1,59 @@
+<!-- Intro Section -->
+<section class="bg-brains p-3">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <p class="h4">Selected Product</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Loading Spinner -->
+<div *ngIf="loading">
+  <img src="../../../../assets/img/spinner.gif" class="m-auto d-block" alt="">
+</div>
+
+<!-- Display selected Product -->
+<section class="p-3 mt-3" *ngIf="!loading && selectedProduct">
+  <div class="container">
+    <div class="row no-gutters">
+      <div class="col-md-5 text-center">
+        <img [src]="selectedProduct.image" class="img-fluid" alt="">
+      </div>
+      <div class="col-md-7">
+        <h5>NAME :
+          <span class="font-weight-bold">{{selectedProduct.name}}</span>
+        </h5>
+        <h5>Brand :
+          <span class="font-weight-bold">{{selectedProduct.brand}}</span>
+        </h5>
+        <h5>Price :
+          <span class="font-weight-bold text-danger">{{selectedProduct.price | currency : 'INR'}}</span>
+        </h5>
+        <!-- Select Qty -->
+        <div>
+          <form class="form-inline">
+            <div class="form-group">
+              <select
+                name="selectedQty"
+                [(ngModel)]="selectedQty"
+                class="form-control">
+                <option value="">Select a Qty</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </div>
+          </form>
+          <button class="btn btn-brains btn-sm my-2" (click)="clickAddToCart()">Add to Cart</button>
+        </div>
+
+        <p>{{selectedProduct.description}}</p>
+        <p>{{selectedProduct.usage}}</p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,96 @@
+<!-- Intro Section -->
+<section class="bg-brains p-3">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <p class="h4 animated flipInY">
+         <i class="fa fa-cloud-upload-alt"></i> Upload Products</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!--<pre>{{product | json}}</pre>-->
+<!-- Upload Form -->
+<section class="p-3">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="card animated zoomInUp">
+          <div class="card-header bg-dark text-brains">
+            <p class="h4">Upload Here</p>
+          </div>
+          <div class="card-body bg-brains">
+            <form (submit)="submitUploadProduct()">
+                <div class="form-group">
+                  <input
+                    name="name"
+                    [(ngModel)]="product.name"
+                    type="text" class="form-control" placeholder="Name">
+                </div>
+                <div class="form-group">
+                  <div class="custom-file">
+                    <input
+                      name="image"
+                      (change)="selectProductImage($event)"
+                      type="file" class="custom-file-input" id="customFile">
+                    <label class="custom-file-label" for="customFile">
+                      <small *ngIf="product.image">
+                        <img [src]="product.image" width="15" height="25" alt="">
+                      </small>
+                      <small *ngIf="!product.image">
+                        Choose Image
+                      </small>
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <select
+                    name="category"
+                    [(ngModel)]="product.category"
+                    class="form-control">
+                    <option value="">Select a Category</option>
+                    <option value="MEN">Men's Wear</option>
+                    <option value="KIDS">Kid's Wear</option>
+                    <option value="WOMEN">Women's Wear</option>
+                  </select>
+                </div>
+              <div class="form-group">
+                <input
+                  name="brand"
+                  [(ngModel)]="product.brand"
+                  type="text" class="form-control" placeholder="Brand">
+              </div>
+              <div class="form-group">
+                <input
+                  name="price"
+                  [(ngModel)]="product.price"
+                  type="number" class="form-control" placeholder="Price">
+              </div>
+              <div class="form-group">
+                <input
+                  name="qty"
+                  [(ngModel)]="product.qty"
+                  type="number" class="form-control" placeholder="Qty">
+              </div>
+              <div class="form-group">
+                <textarea
+                  name="description"
+                  [(ngModel)]="product.description"
+                  rows="3" class="form-control" placeholder="Description"></textarea>
+              </div>
+              <div class="form-group">
+                <textarea
+                  name="usage"
+                  [(ngModel)]="product.usage"
+                  rows="3" class="form-control" placeholder="Usage Information"></textarea>
+              </div>
+              <div>
+                <input type="submit" class="btn btn-dark text-brains btn-sm" value="Upload">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

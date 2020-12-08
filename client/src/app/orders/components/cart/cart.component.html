@@ -1,0 +1,94 @@
+<!-- Intro Section -->
+<section class="bg-brains p-3">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <p class="h4 animated flipInY">
+          <i class="fa fa-shopping-cart"></i> Cart Items</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- For Empty Cart Items -->
+<section class="p-3" *ngIf="cartItems.length === 0">
+  <div class="container">
+    <div class="row">
+      <div class="col text-center">
+        <p class="h4 font-weight-bold text-brains">------------------ Cart is Empty --------------</p>
+        <a routerLink="/" class="btn btn-brains btn-sm">Shop Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Cart Items Table -->
+<section class="p-3" *ngIf="cartItems.length > 0">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header bg-dark text-brains">
+              <p class="h4">Your Cart Items</p>
+          </div>
+          <div class="card-body">
+            <table class="table table-hover text-center table-striped bg-brains">
+              <thead>
+                <tr>
+                  <th>SNO</th>
+                  <th>Image</th>
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>Qty</th>
+                  <th>Total</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let cartItem of cartItems; let i = index">
+                  <td>{{i + 1}}</td>
+                  <td>
+                    <img [src]="cartItem.image" width="50" height="80" alt="">
+                  </td>
+                  <td>{{cartItem.name}}</td>
+                  <td>{{cartItem.price | currency : 'INR'}}</td>
+                  <td>
+                    <i class="fa fa-minus-circle mx-1" (click)="clickDecrCartItemQty(cartItem)"></i>
+                    {{cartItem.qty}}
+                    <i class="fa fa-plus-circle mx-1" (click)="clickIncrCartItemQty(cartItem)"></i>
+                  </td>
+                  <td>{{(cartItem.qty * cartItem.price ) | currency : 'INR'}}</td>
+                  <td>
+                    <button class="btn btn-danger btn-sm" (click)="clickDeleteCartItem(cartItem)">Delete</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header bg-dark text-brains">
+            <p class="h4">Your Total</p>
+          </div>
+          <div class="card-body">
+            <ul class="list-group ">
+              <li class="list-group-item bg-brains">
+                Total : <span class="font-weight-bold">{{calcTotal() | currency : 'INR'}}</span>
+              </li>
+              <li class="list-group-item bg-brains">
+                Tax : <span class="font-weight-bold">{{calcTax() | currency : 'INR'}}</span>
+              </li>
+              <li class="list-group-item bg-brains">
+                Grand Total : <span class="font-weight-bold">{{calcGrandTotal() | currency : 'INR'}}</span>
+              </li>
+            </ul>
+            <button class="btn btn-success btn-sm" (click)="clickCheckout()">Checkout</button>
+            <button class="btn btn-secondary btn-sm">Shop More</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

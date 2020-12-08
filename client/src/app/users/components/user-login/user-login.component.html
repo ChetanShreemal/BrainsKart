@@ -1,0 +1,80 @@
+<!-- Intro Section -->
+<section class="bg-brains p-3">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <p class="h4 animated flipInY">
+          <i class="fa fa-sign-in-alt"></i> Login Here</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Login Form -->
+<section class="p-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 m-auto">
+        <!-- Empty Form Alert -->
+        <div *ngIf="isEmpty" class="alert alert-danger alert-dismissible animated zoomIn">
+          <button class="close" data-dismiss="alert">
+            <i class="fa fa-times-circle"></i>
+          </button>
+          <small>Please fill in the fields</small>
+        </div>
+        <div class="card animated jello">
+          <div class="card-header bg-dark text-brains">
+            <p class="h4">Login</p>
+          </div>
+          <div class="card-body bg-brains">
+            <form #loginForm="ngForm" (submit)="submitLogin()">
+              <div class="form-group">
+                <input
+                    #email="ngModel"
+                    name="email"
+                    [(ngModel)]="user.email"
+                    [class.is-invalid]="email.touched && email.invalid"
+                    [class.is-valid]="email.touched && email.valid"
+                    type="email" class="form-control" placeholder="Email"
+                    required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+                <div *ngIf="email.touched && email.invalid">
+                  <small class="text-danger">Enter a proper Email</small>
+                </div>
+                <small *ngIf="email.touched && email.valid" class="text-success">
+                  Looks Good
+                </small>
+              </div>
+              <div class="form-group">
+                <input
+                    #password="ngModel"
+                    name="password"
+                    [(ngModel)]="user.password"
+                    [class.is-invalid]="password.touched && password.invalid"
+                    [class.is-valid]="password.touched && password.valid"
+                    type="password" class="form-control" placeholder="Password"
+                    required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$">
+                <div *ngIf="password.touched && password.invalid">
+                  <small class="text-danger">Enter a proper Password</small>
+                </div>
+                <small *ngIf="password.touched && password.valid" class="text-success">
+                  Looks Good
+                </small>
+              </div>
+              <div>
+                <input type="submit" class="btn btn-dark text-brains btn-sm" value="Login">
+              </div>
+              <div>
+                <small>New to BrainsKart ?
+                  <a routerLink="/users/register" class="font-weight-bold text-dark">Register</a>
+                </small>
+              </div>
+            </form>
+          </div>
+          <div class="card-footer bg-dark text-center">
+            <img src="../../../../assets/img/brand.PNG" width="180" height="35" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

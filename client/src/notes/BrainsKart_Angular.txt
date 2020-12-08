@@ -1,0 +1,195 @@
+BrainsKart Application (MEAN)
+-----------------------------
+Client -> Angular + NGRX + Bootstrap
+Server -> Node JS + Express JS + MongoDB
+
+Folder Structure
+-----------------
+BrainsKart
+	-> client
+		-> Client Code 
+	-> server Code
+	
+
+client Configuration
+---------------------
+-> Create an Angular Application "client" -> ng new client
+
+-> root -> 
+	-> components
+		-> navbar , home
+	-> services
+	-> models 	
+	
+-> modules -> products , orders , users	
+	ng generate module products --route products --module app.module
+	ng generate module orders --route orders --module app.module
+	ng generate module users --route users --module app.module
+	
+-> each module have its own things
+	components , 
+	services , 
+	models , 
+	actions , 
+	reducers , 
+	effects
+	
+-> Users Module :
+		components : user-login , user-register , user-profile
+		services : user.service
+		
+-> Products module :
+		components : mens-wear , kids-wear , women-wear, product-upload , product-details
+        services : product.service
+		
+-> Orders module : 
+		components : cart , checkout , order-list
+		services : order.service	
+
+-----------------------------------------------------------
+NGRX Configuration
+-----------------------------------------------------------
+-> Install the NGRX libraries
+
+		npm install @ngrx/store
+		npm install @ngrx/store-devtools
+		npm install @ngrx/effects 
+		npm install @ngrx/schematics
+
+-> configure the @ngrx/schematics for Angular CLI
+		
+		ng add @ngrx/schematics@latest
+	
+
+Root (store , effect) (/src/app folder)
+---------------------
+ng generate @ngrx/schematics:store State --root --module app.module.ts
+ng generate @ngrx/schematics:effect Root --root --module app.module.ts --group
+
+		 
+users (actions , reducers , effects, state) (users folder)
+---------------------------------------
+ng generate @ngrx/schematics:store State --module users.module.ts
+ng generate @ngrx/schematics:reducer user --group
+ng generate @ngrx/schematics:action user --group
+ng generate @ngrx/schematics:effect user --module users.module.ts --group
+
+products (actions , reducers , effects) (products folder)
+---------------------------------------
+ng generate @ngrx/schematics:store State --module products.module.ts
+ng generate @ngrx/schematics:reducer product --group
+ng generate @ngrx/schematics:action product --group
+ng generate @ngrx/schematics:effect product --module products.module.ts --group	
+		
+orders (actions , reducers , effects) (orders folder)
+---------------------------------------
+ng generate @ngrx/schematics:store State --module orders.module.ts
+ng generate @ngrx/schematics:reducer order --group
+ng generate @ngrx/schematics:action order --group
+ng generate @ngrx/schematics:effect order --module orders.module.ts --group	
+	
+	
+Note : Modify the each "module" level "state" -> "index.ts"
+		-> import { environment } from '../../../environments/environment';
+	
+-----------------------------------------------------------
+Server Configuration
+-----------------------------------------------------------
+modules : 	bcryptjs , 
+			cors , 
+			dotenv , 
+			express , 
+			express-validator , 
+			gravatar ,
+			jsonwebtoken,
+			mongoose,
+			stripe
+
+npm install bcryptjs cors dotenv express express-validator gravatar jsonwebtoken mongoose stripe
+
+REST API Configuration
+-----------------------
+Routers : userRouter , productRouter , paymentRouter , orderRouter
+
+A) userRouter : 
+	
+	1) Register a User 
+			URL : /user/register
+			fields : name , email , password
+			Method : POST
+			ACCESSS : PUBLIC
+
+	2) Login a User 
+			URL : /user/login
+			fields : email , password
+			Method : POST
+			ACCESSS : PUBLIC
+			
+	3) Get user Info
+			URL : /user/
+			fields : no-fields
+			Method : GET
+			ACCESSS : PRIVATE
+			
+	4) to Create / Update Address
+			URL : /user/address
+			fields : flat , street , landmark , city , state , country , pin , mobile
+			Method : POST
+			ACCESS : PRIVATE
+	
+B) productRouter
+	
+	1) Usage : Upload a product
+		URL : /product/upload
+		fields : name , brand , price , qty , image , category , description , usage
+		Method : POST 
+		Access : PRIVATE
+		
+	2) Usage : Get men's product
+		URL : /product/men
+		fields : no fields
+		Method : GET 
+		Access : PUBLIC	
+
+	3) Usage : Get women's Collection
+		URL : /product/women
+		fields : no fields
+		Method : GET 
+		Access : PUBLIC
+
+	4)  Usage : Get kids Collection
+		URL : /product/women
+		fields : no fields
+		Method : GET 
+		Access : PUBLIC
+
+	5) Usage : Get a product
+		URL : /product/:id
+		fields : no fields
+		Method : GET 
+		Access : PUBLIC
+
+C) Order Router 
+
+	1) Usage : To place an order
+		URL : /order/
+		Method : POST
+		fields : items , tax , total
+		Access : PRIVATE
+
+	2) Usage : GET All Orders
+		URL : /order/
+		Method : GET
+		fields : no fields
+		Access : PRIVATE
+	
+D) Payment Router
+
+	1) Usage : Accept the Stripe Payments
+		URL : /payment/pay
+		Method : POST
+		fields : product , token
+		Access : PRIVATE
+		
+		
+		

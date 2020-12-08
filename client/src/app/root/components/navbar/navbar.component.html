@@ -1,0 +1,54 @@
+<nav class="navbar navbar-dark bg-dark navbar-expand-sm">
+  <div class="container">
+    <a routerLink="/" class="navbar-brand">
+      <img src="../../../../assets/img/brand.PNG" alt="" width="120" height="30">
+    </a>
+
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a routerLink="/products/men" class="nav-link">Men's Wear</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/products/women" class="nav-link">Women's Wear</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/products/kids" class="nav-link">Kid's Wear</a>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn() && isAdmin()">
+          <a routerLink="/products/upload" class="nav-link">Upload</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/orders/cart" class="nav-link">
+            <i class="fa fa-shopping-cart"></i>
+            <span class="badge badge-success badge-pill">{{cartItems.length}}</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/orders/order-list" class="nav-link">Orders</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item" *ngIf="isLoggedIn()">
+          <a routerLink="/users/profile" class="nav-link">
+            <img [src]="getUser().avatar" alt="" width="25" height="25" class="rounded-circle">
+            {{getUser().name}}
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn()">
+          <a routerLink="/users/register" class="nav-link" (click)="clickLogOut()">
+            <i class="fa fa-sign-out-alt text-muted"></i> Logout</a>
+        </li>
+        <li class="nav-item" *ngIf="!isLoggedIn()">
+          <a routerLink="/users/login" class="nav-link">
+           <i class="fa fa-sign-in-alt text-muted"></i> Login</a>
+        </li>
+        <li class="nav-item" *ngIf="!isLoggedIn()">
+          <a routerLink="/users/register" class="nav-link">
+           <i class="fa fa-user-cog text-muted"></i> Register</a>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
